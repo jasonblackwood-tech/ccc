@@ -1,16 +1,33 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cross-Country Canada</title>
-  </head>
-  <body style="margin:0">
-    <iframe
-  src="https://js-dos.com/v8/build/player.html?bundleUrl=https%3A%2F%2Fraw.githubusercontent.com%2Fjasonblackwood-tech%2Fccc%2Fmain%2Fcrosscanada.zip"
-  style="width:100vw;height:100vh;border:0"
-  allowfullscreen>
-</iframe>
-    </iframe>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Cross-Country Canada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- DOSBox (js-dos legacy, no license required) -->
+  <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
+</head>
+
+<body style="margin:0">
+  <canvas id="dosbox" style="width:100vw;height:100vh;"></canvas>
+
+  <script>
+    Dos(document.getElementById("dosbox"), {
+      wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
+      cycles: 12000,
+      autolock: true
+    }).ready(function (fs, main) {
+
+      main.fs.extract(
+        "https://raw.githubusercontent.com/jasonblackwood-tech/ccc/main/crosscanada.zip",
+        "/"
+      ).then(function () {
+
+        main.run("CCAN.exe");
+
+      });
+    });
+  </script>
+</body>
 </html>
