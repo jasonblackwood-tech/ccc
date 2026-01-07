@@ -4,27 +4,28 @@
   <meta charset="utf-8">
   <title>Cross-Country Canada</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" href="https://js-dos.com/6.22/current/js-dos.css">
   <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
 </head>
 
 <body style="margin:0">
-  <canvas id="jsdos" style="width:100vw;height:100vh;"></canvas>
+  <canvas id="dos" style="width:100vw;height:100vh;"></canvas>
 
   <script>
     const zipUrl = "https://jasonblackwood-tech.github.io/ccc/crosscanada.zip";
 
-    Dos(document.getElementById("jsdos"), {
+    Dos(document.getElementById("dos"), {
       wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
       cycles: 12000,
       autolock: true
-    }).ready((fs, main) => {
+    }).ready(function (fs, main) {
 
-      fs.extract(zipUrl, "/game").then(() => {
-        // cd into the extracted folder and run the exe
-        return main(["-c", "cd game", "-c", "CCAN.EXE"]);
-      }).catch((e) => {
+      fs.extract(zipUrl, "/game").then(function () {
+        // Run commands inside DOSBox:
+        // 1) go to the extracted folder
+        // 2) run your game EXE
+        main(["-c", "cd game", "-c", "CCAN.EXE"]);
+      }).catch(function (e) {
         document.body.innerHTML =
           "<pre style='padding:12px;white-space:pre-wrap'>" +
           "Load failed:\n" + (e && e.message ? e.message : e) +
