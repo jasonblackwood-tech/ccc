@@ -5,36 +5,19 @@
   <title>Cross-Country Canada</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- js-dos styles (important) -->
   <link rel="stylesheet" href="https://js-dos.com/6.22/current/js-dos.css">
-
-  <!-- js-dos runtime -->
   <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
 </head>
 
 <body style="margin:0">
-  <!-- Use a DIV container (not a canvas) -->
   <div id="dos" style="width:100vw;height:100vh;"></div>
 
   <script>
-    // Load the zip from *your GitHub Pages site* to avoid CORS headaches
-    const bundleUrl = "https://jasonblackwood-tech.github.io/ccc/crosscanada.zip";
-
     Dos(document.getElementById("dos"), {
       wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
       cycles: 12000,
       autolock: true
-    }).ready(function (fs, main) {
-
-      main.fs.extract(bundleUrl, "/").then(function () {
-        main.run("CCAN.EXE");
-      }).catch(function (e) {
-        // If something fails, show the error on screen
-        document.body.innerHTML =
-          "<pre style='padding:12px;white-space:pre-wrap'>" + (e && e.message ? e.message : e) + "</pre>";
-      });
-
-    });
+    }).run("https://jasonblackwood-tech.github.io/ccc/crosscanada.zip");
   </script>
 </body>
 </html>
