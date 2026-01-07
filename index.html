@@ -24,7 +24,7 @@
         // Run commands inside DOSBox:
         // 1) go to the extracted folder
         // 2) run your game EXE
-        main(["-c", "cd game", "-c", "cd crossc~1", "CCAN.EXE"]);
+        main(["-c", "cd game", "-c", "cd crossc~1","-c", "CCAN.EXE"]);
       }).catch(function (e) {
         document.body.innerHTML =
           "<pre style='padding:12px;white-space:pre-wrap'>" +
