@@ -10,14 +10,28 @@
 </head>
 
 <body style="margin:0">
-  <div id="dos" style="width:100vw;height:100vh;"></div>
+  <canvas id="jsdos" style="width:100vw;height:100vh;"></canvas>
 
   <script>
-    Dos(document.getElementById("dos"), {
+    const zipUrl = "https://jasonblackwood-tech.github.io/ccc/crosscanada.zip";
+
+    Dos(document.getElementById("jsdos"), {
       wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
       cycles: 12000,
       autolock: true
-    }).run("https://jasonblackwood-tech.github.io/ccc/crosscanada.zip");
+    }).ready((fs, main) => {
+
+      fs.extract(zipUrl, "/game").then(() => {
+        // cd into the extracted folder and run the exe
+        return main(["-c", "cd game", "-c", "CCAN.EXE"]);
+      }).catch((e) => {
+        document.body.innerHTML =
+          "<pre style='padding:12px;white-space:pre-wrap'>" +
+          "Load failed:\n" + (e && e.message ? e.message : e) +
+          "</pre>";
+      });
+
+    });
   </script>
 </body>
 </html>
